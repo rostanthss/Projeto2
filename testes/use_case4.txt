@@ -1,0 +1,72 @@
+#################
+# Caso de Uso 4 #
+#################
+
+## Criar Lista de Compra ##
+
+expect "Hiper shopping" adicionaListaDeCompras descritorLista="Hiper shopping"
+expect "Extra" adicionaListaDeCompras descritorLista="Extra"
+
+## Adicionar Itens a Lista ##
+
+#Descricao: Hiper shopping
+adicionaCompraALista descritorLista="Hiper shopping" quantidade=3 itemId=15
+adicionaCompraALista descritorLista="Hiper shopping" quantidade=1 itemId=16
+adicionaCompraALista descritorLista="Hiper shopping" quantidade=2 itemId=17
+adicionaCompraALista descritorLista="Hiper shopping" quantidade=1 itemId=18
+adicionaCompraALista descritorLista="Hiper shopping" quantidade=1 itemId=19
+
+#Descricao: Extra
+adicionaCompraALista descritorLista="Extra" quantidade=3 itemId=15
+adicionaCompraALista descritorLista="Extra" quantidade=1 itemId=20
+adicionaCompraALista descritorLista="Extra" quantidade=2 itemId=21
+adicionaCompraALista descritorLista="Extra" quantidade=2 itemId=22
+adicionaCompraALista descritorLista="Extra" quantidade=1 itemId=23
+adicionaCompraALista descritorLista="Extra" quantidade=2 itemId=24
+
+## Finalizar Lista ##
+
+finalizarListaDeCompras descritorLista="Hiper shopping" localDaCompra="Shopping Boulevard" valorFinalDaCompra=600
+finalizarListaDeCompras descritorLista="Extra" localDaCompra="Shopping Boulevard" valorFinalDaCompra=300
+
+## Pesquisa de lista de compra por descricao ##Usando metodos auxiliar
+
+expect "1 Algodao Clemer, higiene pessoal, 300 gramas"  getItemLista descritorLista="Hiper shopping" posicaoItem=0
+expect "2 Pasta dental DDS, higiene pessoal, 120 gramas"  getItemLista descritorLista="Hiper shopping" posicaoItem=1
+expect "3 Sabonete de aveia Dorene, higiene pessoal, 80 gramas"  getItemLista descritorLista="Hiper shopping" posicaoItem=2
+expect "1 Creme de ricota Rocota, alimento industrializado"  getItemLista descritorLista="Hiper shopping" posicaoItem=3
+expect "1 Queijo minas Dali, alimento industrializado"  getItemLista descritorLista="Hiper shopping" posicaoItem=4
+
+expect "3 Sabonete de aveia Dorene, higiene pessoal, 80 gramas" getItemLista descritorLista="Extra" posicaoItem=0
+expect "2 Sabao liquido Pomo, limpeza, 1 l" getItemLista descritorLista="Extra" posicaoItem=1
+expect "2 Requeijao rerequeijon, alimento industrializado" getItemLista descritorLista="Extra" posicaoItem=2
+expect "1 Batata doce, alimento nao industrializado" getItemLista descritorLista="Extra" posicaoItem=3
+expect "2 Carne moida extra light, alimento nao industrializado" getItemLista descritorLista="Extra" posicaoItem=4
+expect "1 Chuchu, alimento nao industrializado" getItemLista descritorLista="Extra" posicaoItem=5
+
+
+## Pesquisa por data de criacao ## Colocando data atual do teste #Metodos auxiliares
+
+dataAtual=dataAtual
+
+expect "Extra" getItemListaPorData data=${dataAtual} posicaoLista=0
+expect "feira quinzenal" getItemListaPorData data=${dataAtual} posicaoLista=1
+expect "feira semana" getItemListaPorData data=${dataAtual} posicaoLista=2
+expect "Hiper shopping" getItemListaPorData data=${dataAtual} posicaoLista=3
+expect "outra feira" getItemListaPorData data=${dataAtual} posicaoLista=4
+
+## Pesquisa lista por id item ##Colocando data atual do teste #Metodos auxiliares
+
+
+expect ${dataAtual}" - feira semana" getItemListaPorItem id=16 posicaoLista=0
+expect ${dataAtual}" - Hiper shopping" getItemListaPorItem id=16 posicaoLista=1
+expect ${dataAtual}" - outra feira" getItemListaPorItem id=16 posicaoLista=2
+
+expect ${dataAtual}" - Extra" getItemListaPorItem id=20 posicaoLista=0
+expect ${dataAtual}" - feira semana" getItemListaPorItem id=20 posicaoLista=1
+
+expect ${dataAtual}" - Extra" getItemListaPorItem id=15 posicaoLista=0
+expect ${dataAtual}" - feira quinzenal" getItemListaPorItem id=15 posicaoLista=1
+expect ${dataAtual}" - feira semana" getItemListaPorItem id=15 posicaoLista=2
+expect ${dataAtual}" - Hiper shopping" getItemListaPorItem id=15 posicaoLista=3
+

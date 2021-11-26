@@ -1,0 +1,58 @@
+###########################
+# Caso de Uso 3  Exception#
+###########################
+
+## Criar Lista de Compra com atributos invalidos ##
+
+expectError "Erro na criacao de lista de compras: descritor nao pode ser vazio ou nulo." adicionaListaDeCompras descritorLista=""
+expectError "Erro na criacao de lista de compras: descritor nao pode ser vazio ou nulo." adicionaListaDeCompras descritorLista=" "
+
+## Criar Lista de Compra ##
+
+adicionaListaDeCompras descritorLista="feira quinzenal"
+
+## Pesquisa Itens nao adicionados ##
+
+expectError "Erro na pesquisa de compra: compra nao encontrada na lista." pesquisaCompraEmLista descritorLista="feira quinzenal" itemId=15
+
+## Atualizacao item nao cadastrado ##
+
+expectError "Erro na atualizacao de compra: compra nao encontrada na lista." atualizaCompraDeLista descritorLista="feira quinzenal" itemId=5 operacao="adiciona" novaQuantidade=2
+
+## Atualizacao com operacao invalida ##
+
+expectError "Erro na atualizacao de compra: operacao invalida para atualizacao." atualizaCompraDeLista descritorLista="feira quinzenal" itemId=15 operacao="multiplica" novaQuantidade=5
+
+
+## Adicionar a lista de compras Itens nao cadastrados ##
+
+expectError "Erro na compra de item: item nao existe no sistema." adicionaCompraALista descritorLista="feira quinzenal" quantidade=3 itemId=35
+expectError "Erro na compra de item: item nao existe no sistema." adicionaCompraALista descritorLista="feira quinzenal" quantidade=1 itemId=40
+
+## Cadastrar Itens ##
+
+adicionaCompraALista descritorLista="feira quinzenal" quantidade=3 itemId=15
+adicionaCompraALista descritorLista="feira quinzenal" quantidade=1 itemId=16
+
+## Valores invalidos na pesquisa ##
+
+expectError "Erro na pesquisa de compra: item id invalido." pesquisaCompraEmLista descritorLista="feira quizenal" itemId=-1
+expectError "Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo." pesquisaCompraEmLista descritorLista="" itemId=15
+expectError "Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo." pesquisaCompraEmLista descritorLista=" " itemId=15
+
+## Deletar valido ##
+deletaCompraDeLista escritorLista="feira quinzenal" itemId=16
+
+## Deletar atributo e item invalido ##
+
+expectError "Erro na exclusao de compra: descritor nao pode ser vazio ou nulo." deletaCompraDeLista escritorLista="" itemId=15
+expectError "Erro na exclusao de compra: descritor nao pode ser vazio ou nulo." deletaCompraDeLista escritorLista=" " itemId=15
+expectError "Erro na exclusao de compra: compra nao encontrada na lista." deletaCompraDeLista descritorLista="feira quinzenal" itemId=16
+expectError "Erro na exclusao de compra: item nao existe no sistema." deletaCompraDeLista descritorLista="feira quinzenal" itemId=56
+
+## Finalizar Lista parametros invalidos##
+
+expectError "Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo." finalizarListaDeCompras descritorLista="" localDaCompra="Shopping Boulevard" valorFinalDaCompra=1000
+expectError "Erro na finalizacao de lista de compras: local nao pode ser vazio ou nulo." finalizarListaDeCompras descritorLista="feira quinzenal" localDaCompra="" valorFinalDaCompra=1000
+expectError "Erro na finalizacao de lista de compras: valor final da lista invalido." finalizarListaDeCompras descritorLista="feira quinzenal" localDaCompra="Shopping Boulevard" valorFinalDaCompra=-1000
+expectError "Erro na finalizacao de lista de compras: valor final da lista invalido." finalizarListaDeCompras descritorLista="feira quinzenal" localDaCompra="Shopping Boulevard" valorFinalDaCompra=0

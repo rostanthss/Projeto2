@@ -1,0 +1,38 @@
+###########################
+# Caso de Uso 4  Exception#
+###########################
+
+## Criar Lista de Compra ##
+
+expect "Hiper Acude Velho" adicionaListaDeCompras descritorLista="Hiper Acude Velho"
+expect "Extra Catole" adicionaListaDeCompras descritorLista="Extra Catole"
+
+## Adicionar Itens a Lista ##
+
+#Descricao: Hiper shopping
+adicionaCompraALista descritorLista="Hiper Acude Velho" quantidade=3 itemId=15
+adicionaCompraALista descritorLista="Hiper Acude Velho" quantidade=1 itemId=16
+
+#Descricao: Extra
+adicionaCompraALista descritorLista="Extra Catole" quantidade=3 itemId=15
+adicionaCompraALista descritorLista="Extra Catole" quantidade=2 itemId=20
+adicionaCompraALista descritorLista="Extra Catole" quantidade=2 itemId=21
+
+## Finalizar Lista ##
+
+finalizarListaDeCompras descritorLista="Hiper Acude Velho" localDaCompra="Shopping Bompreco Acude Velho" valorFinalDaCompra=600
+finalizarListaDeCompras descritorLista="Extra Catole" localDaCompra="Shopping Boulevard" valorFinalDaCompra=300
+
+## Pesquisa de lista de compra por descricao ##
+
+expectError "Erro na pesquisa de compra: lista de compras nao existe." pesquisaListaDeCompras descritorLista="Feira de natal"
+expectError "Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo." pesquisaListaDeCompras descritorLista=""
+
+## Pesquisa por data de criacao ##
+
+expectError "Erro na pesquisa de compra: data em formato invalido, tente dd/MM/yyyy" pesquisaListasDeComprasPorData data="01012000"
+expectError "Erro na pesquisa de compra: data nao pode ser vazia ou nula." pesquisaListasDeComprasPorData data=""
+
+## Pesquisa lista por id item ##
+
+expectError "Erro na pesquisa de compra: compra nao encontrada na lista." pesquisaListasDeComprasPorItem id=200
